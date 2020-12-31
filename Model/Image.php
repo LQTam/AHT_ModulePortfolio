@@ -59,6 +59,33 @@ class Image extends \Magento\Framework\Model\AbstractModel implements
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
+    public function setDataModel(\AHT\Portfolio\Api\Data\ImageInterface $image)
+    {
+        $this->setPortfolioId($image->getPortfolioId());
+        $this->setThumbnail($image->getThumbnail());
+        $this->setName($image->getName());
+        $this->setSrc($image->getSrc());
+        $this->setAlt($image->getAlt());
+        $this->setWidth($image->getWidth());
+        $this->setHeight($image->getHeight());
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPortfolioId()
+    {
+        return $this->getData(self::PORTFOLIO_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPortfolioId($portfolio_id)
+    {
+        $this->setData(self::PORTFOLIO_ID, $portfolio_id);
+    }
 
     /**
      * @inheritDoc
@@ -75,25 +102,6 @@ class Image extends \Magento\Framework\Model\AbstractModel implements
     {
         $this->setData(self::IMAGE_ID, $image_id);
     }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function setPortfolioId($portfolio_id)
-    {
-        $this->setData(self::PORTFOLIO_ID, $portfolio_id);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getPortfolioId()
-    {
-        return $this->getData(self::PORTFOLIO_ID);
-    }
-
-
 
     /**
      * @inheritDoc
@@ -140,7 +148,7 @@ class Image extends \Magento\Framework\Model\AbstractModel implements
      */
     public function setName($name)
     {
-        $this->setData(self::NAME);
+        $this->setData(self::NAME, $name);
     }
 
     /**
@@ -156,7 +164,7 @@ class Image extends \Magento\Framework\Model\AbstractModel implements
      */
     public function setSrc($src)
     {
-        $this->setData(self::SRC);
+        $this->setData(self::SRC, $src);
     }
 
     /**
@@ -189,17 +197,5 @@ class Image extends \Magento\Framework\Model\AbstractModel implements
     public function setHeight($height)
     {
         $this->setData(self::HEIGHT, $height);
-    }
-
-    public function setDataModel(\AHT\Portfolio\Api\Data\ImageInterface $image)
-    {
-        $this->setPortfolioId($image->getPortfolioId());
-        $this->setThumbnail($image->getThumbnail());
-        $this->setName($image->getName());
-        $this->setSrc($image->getSrc());
-        $this->setAlt($image->getAlt());
-        $this->setWidth($image->getWidth());
-        $this->setHeight($image->getHeight());
-        return $this;
     }
 }

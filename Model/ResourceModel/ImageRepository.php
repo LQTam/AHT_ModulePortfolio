@@ -38,17 +38,10 @@ class ImageRepository implements \AHT\Portfolio\Api\ImageRepositoryInterface
         }
     }
 
-    public function upload(\AHT\Portfolio\Model\ImageUploader $image)
-    {
-
-        return "AAA";
-    }
-
     public function save(ImageInterface $image)
     {
         try {
             if (is_null($image->getImageId())) {
-                return $image;
                 $this->_imageResource->save($image);
                 return ['success' => true, 'message' => "Success created model."];
             } else {
@@ -77,7 +70,9 @@ class ImageRepository implements \AHT\Portfolio\Api\ImageRepositoryInterface
             if (!empty($image)) {
                 $this->_imageResource->delete($image);
                 return ['success' => true, 'message' => 'Success deleted image.'];
-            } else throw new \Exception("Unable to delete image with id: $image_id.");
+            } else {
+                throw new \Exception("Unable to delete image with id: $image_id.");
+            }
         } catch (\Exception $e) {
             return "Failure: " . $e->getMessage();
         }
