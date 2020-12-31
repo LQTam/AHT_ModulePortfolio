@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="portfolio" translate="label" sortOrder="10">
+            <label>Portfolio</label>
+        </tab>
+        <section id="portfolio" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>portfolio-general</class>
+            <label>General</label>
+            <tab>portfolio</tab>
+            <resource>AHT_Portfolio::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <config_path>portfolio/general/enabled</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="page_title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Page Title</label>
+                    <config_path>portfolio/general/page_title</config_path>
+                </field>
+            </group>
+            <group id="seo_metadata" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Seo Engine Optimization</label>
+                <field id="description" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Meta Description</label>
+                    <config_path>portfolio/seo_metadata/description</config_path>
+                </field>
+                <field id="keywords" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Meta Keywords</label>
+                    <config_path>portfolio/seo_metadata/keywords</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

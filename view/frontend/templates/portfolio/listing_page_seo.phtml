@@ -1,0 +1,19 @@
+<?php
+
+/** @var \AHT\Portfolio\Block\Portfolio\Seo\Index $block */
+?>
+
+<!-- <head>
+
+    <title><?= $block->getPageTitle() ?></title>
+    <meta name='description' content="<?= $block->getMetaDescription() ?>" />
+    <meta name='keywords' content="<?= $block->getMetaKeywords() ?>" />
+</head> -->
+<input type="hidden" id='page_title' value="<?= $block->getPageTitle() ?>" />
+<input type="hidden" id='seo_description' value="<?= $block->getMetaDescription() ?>" />
+<input type="hidden" id='seo_keywords' value="<?= $block->getMetaKeywords() ?>" />
+<script type='text/javascript'>
+    document.head.querySelector('title').innerText = document.getElementById('page_title').value;
+    document.head.querySelector('meta[name="description"]').content = document.getElementById('seo_description').value;
+    document.head.querySelector('meta[name="keywords"]').content = document.getElementById('seo_keywords').value;
+</script>

@@ -1,0 +1,13 @@
+<?php
+
+/** @var \AHT\Portfolio\Block\Portfolio\View $block */
+$portfolio = $block->getPortfolio();
+?>
+<a href="<?= $block->getUrl('portfolio/index') ?>">Back to listing</a>
+<div class="portfolio-details">
+    <div class="img">
+        <img src="<?= $portfolio['image']['src'] ?>" width="100%" />
+    </div>
+    <h1><?= $portfolio['client'] ?></h1>
+    <p><?= $portfolio['skill'] ?></p>
+</div>

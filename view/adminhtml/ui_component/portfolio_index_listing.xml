@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <!-- Here we declare the data_source to use with the tag 'js_config', which makes the links between your grid and the database -->
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">portfolio_index_listing.portfolio_index_listing_data_source</item>
+            <item name="deps" xsi:type="string">portfolio_index_listing.portfolio_index_listing_data_source</item>
+        </item>
+
+        <item name="spinner" xsi:type="string">portfolio_index_columns</item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add a new Portfolio</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/create</item>
+            </item>
+        </item>
+    </argument>
+
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <!-- <filterSearch name="fulltext"/>
+        <filters name="listing_filters" /> -->
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+            
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="portfolio/index/massAction"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete Post</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+    </listingToolbar>
+
+     <!-- dataProvider, with a class tag to define the name of the object to be used. -->
+    <dataSource name="portfolio_index_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+
+            <argument name="class" xsi:type="string">PortfolioGridDataProvider</argument>
+            <argument name="name" xsi:type="string">portfolio_index_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">portfolio_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render" />
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">portfolio_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+   
+
+     <!-- define the columns of grid: name from spinner -->
+    <columns name="portfolio_index_columns">
+        
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">portfolio_index_listing.portfolio_index_listing.listing_top.bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+                <item name="childDefaults" xsi:type="array">
+                   
+                    <item name="controlVisibility" xsi:type="boolean">true</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">portfolio_index_listing.portfolio_index_listing.listing_top.bookmarks</item>
+                        <item name="root" xsi:type="string">columns.${ $.index }</item>
+                        <!-- ${ $.index } means the current column index -->
+                        <!-- ${ $.storageConfig.root }: It is referring to root property of current storageConfig
+                            that you previously defined as ${ $.index }.so, at the end it should take the same value as ${ $.index} -->
+                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        
+        <settings>
+            <editorConfig>
+                <param name="indexField" xsi:type="string">portfolio_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">${ $.columnsProvider }.ids</param>
+            </editorConfig>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>portfolio_id</indexField>
+            </settings>
+        </selectionsColumn>
+        
+         <!-- Column ID -->
+        <column name="portfolio_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Portfolio ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        
+        <column name="category_id" class="AHT\Portfolio\Ui\Component\Listing\Columns\Category">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Category</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+
+        <column name="thumbnail" class="AHT\Portfolio\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" >
+            <settings>
+                <altField>name</altField>
+                <hasPreview>1</hasPreview>
+                <label translate="true">Thumbnail</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+
+        <column name="client" >
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Client</label>
+            </settings>
+        </column>
+        
+<column name="project">
+  <argument name="data" xsi:type="array">
+    <item name="config" xsi:type="array">
+       <item name="editor" xsi:type="array">
+          <item name="editorType" xsi:type="string">text</item>
+          <item name="validation" xsi:type="array">
+             <item name="required-entry" xsi:type="boolean">true</item>
+          </item>
+       </item>
+       <item name="label" xsi:type="string" translate="true">Project</item>
+       <item name="sortOrder" xsi:type="number">30</item>
+    </item>
+  </argument>
+</column>
+
+        <column name="skill" >
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Skill</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select" >
+            <settings>
+                <options class="\AHT\Portfolio\Model\Portfolio\Source\Yesno"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        
+        <column name="content" >
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Content</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="AHT\Portfolio\Ui\Component\Listing\Columns\PortfolioActions" >
+            <settings>
+                <indexField>portfolio_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

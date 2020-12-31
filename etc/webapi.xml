@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- START PORTFOLIO API -->
+    <route url="/V1/portfolio" method="GET">
+        <service class="AHT\Portfolio\Api\PortfolioRepositoryInterface" method="getCollection"/>
+        <resources>
+            <!-- <resource ref="AHT_ModuleHelloWorld::subscription_index"/> -->
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio/:portfolio_id" method="GET">
+        <service class="AHT\Portfolio\Api\PortfolioRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio" method="post">
+        <service class="AHT\Portfolio\Api\PortfolioRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio/:portfolio_id" method="put">
+        <service class="AHT\Portfolio\Api\PortfolioRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio/:portfolio_id" method="delete">
+        <service class="AHT\Portfolio\Api\PortfolioRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+<!-- END PORTFOLIO API -->
+
+<!--   START CATEGORY API-->
+    <route url="/V1/portfolio-categories" method="GET">
+        <service class="AHT\Portfolio\Api\CategoryRepositoryInterface" method="getCollection"/>
+        <resources>
+            <!-- <resource ref="AHT_ModuleHelloWorld::subscription_index"/> -->
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-categories/:category_id" method="GET">
+        <service class="AHT\Portfolio\Api\CategoryRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-categories/saveDemo" method="post">
+        <service class="AHT\Portfolio\Api\CategoryRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-categories/:category_id" method="put">
+        <service class="AHT\Portfolio\Api\CategoryRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-categories/:category_id" method="delete">
+        <service class="AHT\Portfolio\Api\CategoryRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+<!--    END CATEGORY API-->
+
+ <!-- START IMAGE API -->
+    <route url="/V1/portfolio-image" method="GET">
+        <service class="AHT\Portfolio\Api\ImageRepositoryInterface" method="getCollection"/>
+        <resources>
+            <!-- <resource ref="AHT_ModuleHelloWorld::subscription_index"/> -->
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-image/:image_id" method="GET">
+        <service class="AHT\Portfolio\Api\ImageRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-image/upload" method="post">
+        <service class="AHT\Portfolio\Api\ImageRepositoryInterface" method="upload"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-image" method="post">
+        <service class="AHT\Portfolio\Api\ImageRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-image/:image_id" method="put">
+        <service class="AHT\Portfolio\Api\ImageRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/portfolio-image/:image_id" method="delete">
+        <service class="AHT\Portfolio\Api\ImageRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+<!-- END IMAGE API -->
+</routes>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="portfolio_product_slider" class="AHT\Portfolio\Block\Catalog\Portfolio\PortfolioSlider" is_email_compatible="false" placeholder_image="Magento_Widget::placeholder.gif">
+   	 <label translate="true">Portfolio product slider</label>
+   	 <description translate="true">List of Portolio for a given category in a slider widget</description>
+   	 <parameters>
+   		 <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="show_pager" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Page Control</label>
+            </parameter>
+            <parameter name="portfolio_per_page" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Portfolio per Page</label>
+                <depends>
+                    <parameter name="show_pager" value="1" />
+                </depends>
+                <value>5</value>
+            </parameter>
+            <parameter name="isSlider" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Enable Slider</label>
+            </parameter>
+            <parameter name="portfolio_per_row" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Portfolio to Display per row</label>
+                <depends>
+                    <parameter name="isSlider" value="1" />
+                </depends>
+                <value>4</value>
+            </parameter>
+            
+            <parameter name="slide_to_scroll" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of slide to scroll</label>
+                <depends>
+                    <parameter name="isSlider" value="1" />
+                </depends>
+                <value>4</value>
+            </parameter>
+   		 
+   		 <parameter name="template" xsi:type="select" required="true" visible="true">
+   			 <label translate="true">Template</label>
+   			 <options>
+   				 <option name="default" value="portfolio/slider/list.phtml" selected="true">
+   					 <label translate="true">Portfolio list slider</label>
+   				 </option>
+   				 <option name="teaser" value="portfolio/slider/teaser.phtml">
+   					 <label translate="true">Portfolio teaser slider</label>
+   				 </option>
+   			 </options>
+   		 </parameter>
+   	 </parameters>
+	</widget>
+</widgets>
