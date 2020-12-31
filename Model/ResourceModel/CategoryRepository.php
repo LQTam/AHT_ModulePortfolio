@@ -58,7 +58,8 @@ class CategoryRepository implements \AHT\Portfolio\Api\CategoryRepositoryInterfa
                 if (is_null($categoryFactory->getCategoryId())) {
                     return ['success' => false, 'message' => "Unable to find the category with id: {$category->getCategoryId()}."];
                 } else {
-                    $categoryFactory->setData($category)->save();
+                    return "EDITED";
+                    // $categoryFactory->setData($category)->save();
                     return ['success' => true, 'message' => "Success edited model."];
                 }
             }

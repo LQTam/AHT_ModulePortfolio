@@ -23,25 +23,25 @@ interface ImageInterface
     /**
      * Set portfolio id.
      *
-     * @param int $image_id
-     * @return $this
-     */
-    public function setPortfolioId($image_id);
-
-    /**
-     * Get category id.
-     *
-     * @return int|null
-     */
-    public function getCategoryId();
-
-    /**
-     * Set category id.
-     *
      * @param int $portfolio_id
      * @return $this
      */
-    public function setCategoryId($portfolio_id);
+    public function setPortfolioId($portfolio_id);
+
+    /**
+     * Get image id.
+     *
+     * @return int|null
+     */
+    public function getImageId();
+
+    /**
+     * Set image id.
+     *
+     * @param int $image_id
+     * @return $this
+     */
+    public function setImageId($image_id);
 
     /**
      * Get thumbnail.
@@ -91,14 +91,14 @@ interface ImageInterface
     /**
      * Get src.
      *
-     * @return int|null
+     * @return string|null
      */
     public function getSrc();
 
     /**
      * Set src.
      *
-     * @param int $src
+     * @param string $src
      * @return $this
      */
     public function setSrc($src);
@@ -106,14 +106,14 @@ interface ImageInterface
     /**
      * Get width.
      *
-     * @return string|null
+     * @return int|null
      */
     public function getWidth();
 
     /**
      * Set width.
      *
-     * @param string $width
+     * @param int $width
      * @return $this
      */
     public function setWidth($width);
@@ -121,14 +121,14 @@ interface ImageInterface
     /**
      * Get height.
      *
-     * @return string|null
+     * @return int|null
      */
     public function getHeight();
 
     /**
      * Set height.
      *
-     * @param string $height
+     * @param int $height
      * @return $this
      */
     public function setHeight($height);

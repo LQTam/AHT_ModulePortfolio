@@ -13,9 +13,11 @@ interface ImageRepositoryInterface
 
     /**
      * Save image 
+     * 
+     * @param \AHT\Portfolio\Model\ImageUploader $image
      * @return bool
      */
-    public function upload();
+    public function upload(\AHT\Portfolio\Model\ImageUploader $image);
 
 
     /**

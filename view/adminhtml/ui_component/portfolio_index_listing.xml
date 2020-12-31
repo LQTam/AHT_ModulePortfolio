@@ -75,7 +75,6 @@
      <!-- dataProvider, with a class tag to define the name of the object to be used. -->
     <dataSource name="portfolio_index_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-
             <argument name="class" xsi:type="string">PortfolioGridDataProvider</argument>
             <argument name="name" xsi:type="string">portfolio_index_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">portfolio_id</argument>
@@ -95,44 +94,38 @@
 
      <!-- define the columns of grid: name from spinner -->
     <columns name="portfolio_index_columns">
-        
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-               
-                <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">portfolio_index_listing.portfolio_index_listing.listing_top.bookmarks</item>
-                    <item name="namespace" xsi:type="string">current</item>
-                </item>
-                <item name="childDefaults" xsi:type="array">
-                   
-                    <item name="controlVisibility" xsi:type="boolean">true</item>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">portfolio_index_listing.portfolio_index_listing.listing_top.bookmarks</item>
-                        <item name="root" xsi:type="string">columns.${ $.index }</item>
-                        <!-- ${ $.index } means the current column index -->
-                        <!-- ${ $.storageConfig.root }: It is referring to root property of current storageConfig
-                            that you previously defined as ${ $.index }.so, at the end it should take the same value as ${ $.index} -->
-                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
-                    </item>
-                </item>
-            </item>
-        </argument>
-        
         <settings>
             <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="portfolio/index/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
                 <param name="indexField" xsi:type="string">portfolio_id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">${ $.columnsProvider }.ids</param>
+                <param name="selectProvider" xsi:type="string">portfolio_index_listing.portfolio_index_listing.portfolio_index_columns.ids</param>
             </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">portfolio_index_listing.portfolio_index_listing.portfolio_index_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
         </settings>
+        
         <selectionsColumn name="ids">
             <settings>
                 <indexField>portfolio_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
             </settings>
         </selectionsColumn>
-        
+
          <!-- Column ID -->
-        <column name="portfolio_id">
+        <column name="portfolio_id" sortOrder='10'>
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">Portfolio ID</label>
@@ -140,7 +133,7 @@
             </settings>
         </column>
         
-        <column name="category_id" class="AHT\Portfolio\Ui\Component\Listing\Columns\Category">
+        <column name="category_id" class="AHT\Portfolio\Ui\Component\Listing\Columns\Category" sortOrder='20'>
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">Category</label>
@@ -148,7 +141,7 @@
             </settings>
         </column>
 
-        <column name="thumbnail" class="AHT\Portfolio\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" >
+        <column name="thumbnail" class="AHT\Portfolio\Ui\Component\Listing\Columns\Thumbnail" sortOrder='30' component="Magento_Ui/js/grid/columns/thumbnail" >
             <settings>
                 <altField>name</altField>
                 <hasPreview>1</hasPreview>
@@ -157,7 +150,7 @@
             </settings>
         </column>
 
-        <column name="client" >
+        <column name="client" sortOrder='40'>
             <settings>
                 <filter>text</filter>
                 <editor>
@@ -170,22 +163,20 @@
             </settings>
         </column>
         
-<column name="project">
-  <argument name="data" xsi:type="array">
-    <item name="config" xsi:type="array">
-       <item name="editor" xsi:type="array">
-          <item name="editorType" xsi:type="string">text</item>
-          <item name="validation" xsi:type="array">
-             <item name="required-entry" xsi:type="boolean">true</item>
-          </item>
-       </item>
-       <item name="label" xsi:type="string" translate="true">Project</item>
-       <item name="sortOrder" xsi:type="number">30</item>
-    </item>
-  </argument>
-</column>
+        <column name="project" sortOrder='50'>
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Project</label>
+            </settings>
+        </column>
 
-        <column name="skill" >
+        <column name="skill" sortOrder='60'>
             <settings>
                 <filter>text</filter>
                 <editor>
@@ -197,7 +188,7 @@
                 <label translate="true">Skill</label>
             </settings>
         </column>
-        <column name="status" component="Magento_Ui/js/grid/columns/select" >
+        <column name="status" sortOrder='70' component="Magento_Ui/js/grid/columns/select" >
             <settings>
                 <options class="\AHT\Portfolio\Model\Portfolio\Source\Yesno"/>
                 <filter>select</filter>
@@ -209,7 +200,7 @@
             </settings>
         </column>
         
-        <column name="content" >
+        <column name="content" sortOrder='80'>
             <settings>
                 <filter>text</filter>
                 <editor>
@@ -221,7 +212,7 @@
                 <label translate="true">Content</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="AHT\Portfolio\Ui\Component\Listing\Columns\PortfolioActions" >
+        <actionsColumn name="actions" sortOrder='90' class="AHT\Portfolio\Ui\Component\Listing\Columns\PortfolioActions" >
             <settings>
                 <indexField>portfolio_id</indexField>
             </settings>

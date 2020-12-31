@@ -55,6 +55,7 @@
 
      <!-- dataProvider, with a class tag to define the name of the object to be used. -->
     <dataSource name="category_index_listing_data_source">
+
         <argument name="dataProvider" xsi:type="configurableObject">
 
             <argument name="class" xsi:type="string">CategoriesGridDataProvider</argument>
@@ -76,62 +77,34 @@
      <!-- define the columns of grid: name from spinner -->
     <columns name="category_index_columns">
         <settings>
-        <editorConfig>
-            <param name="clientConfig" xsi:type="array">
-                <item name="saveUrl" xsi:type="url" path="cms/page/inlineEdit"/>
-                <item name="validateBeforeSave" xsi:type="boolean">false</item>
-            </param>
-            <param name="indexField" xsi:type="string">page_id</param>
-            <param name="enabled" xsi:type="boolean">true</param>
-            <param name="selectProvider" xsi:type="string">cms_page_listing.cms_page_listing.cms_page_columns.ids</param>
-        </editorConfig>
-        <childDefaults>
-            <param name="fieldAction" xsi:type="array">
-                <item name="provider" xsi:type="string">cms_page_listing.cms_page_listing.cms_page_columns_editor</item>
-                <item name="target" xsi:type="string">startEdit</item>
-                <item name="params" xsi:type="array">
-                    <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
-                    <item name="1" xsi:type="boolean">true</item>
-                </item>
-            </param>
-        </childDefaults>
-    </settings>
-        <!-- <selectionsColumn name="ids">
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="portfolio/category/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">category_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">category_index_listing.category_index_listing.category_index_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">category_index_listing.category_index_listing.category_index_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
             <settings>
-                <indexField>page_id</indexField>
+                <indexField>category_id</indexField>
                 <resizeEnabled>false</resizeEnabled>
                 <resizeDefaultWidth>55</resizeDefaultWidth>
             </settings>
-        </selectionsColumn> -->
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <!-- bookmark behavior -->
-                <item name="storageConfig" xsi:type="array">
-                    <item name="provider" xsi:type="string">category_index_listing.category_index_listing.listing_top.bookmarks</item>
-                    <item name="namespace" xsi:type="string">current</item>
-                </item>
-                <item name="childDefaults" xsi:type="array">
-                    <item name="controlVisibility" xsi:type="boolean">true</item>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">category_index_listing.category_index_listing.listing_top.bookmarks</item>
-                        <item name="root" xsi:type="string">columns.${ $.index }</item>
-                        <!-- ${ $.index } means the current column index -->
-                        <!-- ${ $.storageConfig.root }: It is referring to root property of current storageConfig
-                            that you previously defined as ${ $.index }.so, at the end it should take the same value as ${ $.index} -->
-                        <item name="namespace" xsi:type="string">current.${ $.storageConfig.root}</item>
-                    </item>
-                </item>
-            </item>
-        </argument>
-
-        <selectionsColumn name="ids">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">category_id</item>
-                </item>
-            </argument>
         </selectionsColumn>
-
+        
          <!-- Column ID -->
         <column name="category_id">
             <argument name="data" xsi:type="array">
@@ -145,20 +118,16 @@
 
          <!-- Column name -->
         <column name="name">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="visible" xsi:type="boolean">true</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">contact</item>
-                    <item name="dataScope" xsi:type="string">name</item>
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Category Name</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
-                </item>
-            </argument>
+           <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Name</label>
+            </settings>
         </column>
 
         <!-- action columns edit and delete -->

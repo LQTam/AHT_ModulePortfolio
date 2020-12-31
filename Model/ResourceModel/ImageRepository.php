@@ -38,16 +38,23 @@ class ImageRepository implements \AHT\Portfolio\Api\ImageRepositoryInterface
         }
     }
 
+    public function upload(\AHT\Portfolio\Model\ImageUploader $image)
+    {
+
+        return "AAA";
+    }
+
     public function save(ImageInterface $image)
     {
         try {
-            if (is_null($image->getPortfolioId())) {
+            if (is_null($image->getImageId())) {
+                return $image;
                 $this->_imageResource->save($image);
                 return ['success' => true, 'message' => "Success created model."];
             } else {
-                $imageFactory = $this->_imageFactory->create()->load($image->getPortfolioId());
-                if (is_null($imageFactory->getPortfolioId())) {
-                    return ['success' => false, 'message' => "Unable to find the image with id: {$image->getPortfolioId()}."];
+                $imageFactory = $this->_imageFactory->create()->load($image->getImageId());
+                if (is_null($imageFactory->getImageId())) {
+                    return ['success' => false, 'message' => "Unable to find the image with id: {$image->getImageId()}."];
                 } else {
                     $imageFactory->setDataModel($image)->save();
                     return ['success' => true, 'message' => "Success edited model."];

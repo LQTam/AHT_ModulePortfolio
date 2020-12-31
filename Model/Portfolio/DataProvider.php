@@ -45,7 +45,12 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                 unset($itemData['images']);
                 $imageUrl =
                     $images->getData()[0]['src'];
-                $itemData['images'] = $images->getData();
+                $itemData['images'] = [
+                    [
+                        "name" => $imageName,
+                        "url" => $imageUrl
+                    ]
+                ];
             }
             $this->_loadedData[$portfolio->getId()] = $itemData;
         }
